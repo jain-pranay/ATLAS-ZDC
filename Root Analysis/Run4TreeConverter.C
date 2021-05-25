@@ -77,103 +77,116 @@ void Run4TreeConverter() {
     zdcRodNb.resize(4);
 
     int trackID;
-    int EM_rows[26];
-    int HAD_rows[10];
-    double EM_seg[3];
-    double HAD_seg[6];
+    int EM_Rows[26];
+    int HAD_Rows[10];
+    double EM_Seg[3];
+    double HAD_Seg[6];
     double energy;
 
 
     // Output Tree Branches
     // Vector Branches
-    tOut->Branch("lastStepZ", &LastStepInVolume);
-    tOut->Branch("rpdNcherenkov", &RPD_nCherenkovs);
+    tOut->Branch("LastStepZ", &LastStepInVolume);
+    tOut->Branch("RPD_nCherenkov", &RPD_nCherenkovs);
 
     // Standard Branches
-    tOut->Branch("energy", &energy, "energy/D");
-    tOut->Branch("trackID", &trackID, "trackID/I");
+    tOut->Branch("Energy", &energy, "Energy/D");
+    tOut->Branch("TrackID", &trackID, "TrackID/I");
 
     // Array Branches
-    tOut->Branch("EM_seg", EM_seg, "EM_seg[3]/D");
-    tOut->Branch("HAD_seg", HAD_seg, "HAD_seg[6]/D");
-    tOut->Branch("EM_rows", EM_rows, "EM_rows[26]/I");
-    tOut->Branch("HAD_rows", HAD_rows, "HAD_rows[10]/I");
+    tOut->Branch("EM_Seg", EM_Seg, "EM_Seg[3]/D");
+    tOut->Branch("HAD_Seg", HAD_Seg, "HAD_Seg[6]/D");
+    tOut->Branch("EM_Rows", EM_Rows, "EM_Rows[26]/I");
+    tOut->Branch("HAD_Rows", HAD_Rows, "HAD_Rows[10]/I");
 
-    // Setup reading of input tree --------------------------------
-
-    //EventData contains information related to the primary particle
-    TChain chain_event("EventData");
-    //RPD1tree contains nCherenkovs, a 256 length vector corresponding to the # of photons in each rod for an event
-    TChain chain_rpd("RPD1tree");
-    //there are 4 zdc trees corresponding to the EM (ZDC1) + 3HAD (ZDC2-4) modules
-    std::vector<TChain*> ZDCchain;
-    for(int i=0; i<4; i++ ){
-        ZDCchain.push_back( new TChain( Form ("ZDC%dtree", i+1) ) ) ;
+    // Setting up and reading  input tree
+    // EventData contains information related to the primary particle
+    TChain Event_Chain("EventData");
+    // RPD1tree contains nCherenkovs, a 256 length vector corresponding to the # of photons in each rod for an event
+    TChain RPD_Chain("RPD1tree");
+    // There are 4 zdc trees corresponding to the EM (ZDC1) + 3HAD (ZDC2-4) modules
+    vector<TChain*> ZDC_Chain;
+    for (int i = 0; i < 4; i++) {
+        ZDC_Chain.push_back(new TChain(Form("ZDC%dtree", i+1)));
     }
 
-    if(filename.find("_") != string::npos) filename.erase( filename.find_last_of("_") );
+    if (filename.find("_") != string::npos) {
+        filename.erase(filename.find_last_of("_") );
+    }
 
-    //Add all the files to our TChains
-    for(int i = 0; i < num_files; i++){
-
-        chain_event.Add( Form("%s_%d.root",filename.c_str(),i) );
-        chain_rpd.Add( Form("%s_%d.root",filename.c_str(),i) );
-
-        for(int k=0; k<4; k++ ){
-            ZDCchain[k]->Add( Form("%s_%d.root",filename.c_str(),i) );
+    // Add all files to TChains
+    for (int i = 0; i < num_files; i++) {
+        Event_Chain.Add(Form("%s_%d.root", filename.c_str(), i)); // Adds all EventData branches
+        RPD_Chain.Add(Form("%s_%d.root", filename.c_str(), i)); // Adds all RPD1tree branches
+        // Loops over ZDC1tree, ZDC2tree and ZDC3tree, adds all branches
+        for(int k = 0; k < 4; k++) {
+            ZDC_Chain[k]->Add(Form("%s_%d.root", filename.c_str() ,i));
         }
     }
 
-    //Make sure arrays are zeroed
-    for (int i=0; i < 6 ; i++){
-        if(i<3) EM_seg[i] 	  = 0;
-        HAD_seg[i] 						= 0 ;
+    // Ensure all arrays are zeroed
+    for (int i = 0; i < 26; i++) {
+        if (i < 10) {
+            if (i < 6) {
+                if (i < 3) {
+                    EM_Seg[i] = 0;
+                }
+                HAD_Seg[i] = 0;
+            }
+            HAD_Rows[i] = 0;
+        }
+        EM_Rows[i] = 0;
     }
 
     //Set addresses for tree variables
-    chain_event.SetBranchAddress(	"lastStepZ",&LastStepInVolume);
-//		chain_event.SetBranchAddress(	"energy",&energy);
-    chain_rpd.SetBranchAddress(		"nCherenkovs",&RPD_nCherenkovs);
-
-    for(int k=0; k<4; k++ ){
-        ZDCchain[k]->SetBranchAddress("rodNo", &zdcRodNb[k]);
+    Event_Chain.SetBranchAddress("lastStepZ", &LastStepInVolume);
+    RPD_Chain.SetBranchAddress("nCherenkovs", &RPD_nCherenkovs);
+    for (int i = 0; i < 4; i++) {
+        ZDC_Chain[i]->SetBranchAddress("rodNo", &zdcRodNb[i]);
     }
 
-    int nEntries = ZDCchain[0]->GetEntries();
+    int nEntries = ZDC_Chain[0]->GetEntries();
 
-    // Begin loop over events -------------------------------------------------------------------------
-    for (int q=0;q<nEntries; q++)
-    {
-        if(q%10 == 0) cout << "\r" << left << Form("Processing event %d of %d", q, nEntries) << flush << endl;
+    // Loop over number of entries (events set per job)
+    for (int q = 0; q< nEntries; q++) {
+        if (q % 5 == 0) cout << "\r" << left << Form("Processing event %d of %d", q, nEntries) << flush << endl;
 
-        // Retrieve entry from trees -------------------------------------------------------------------------
-        chain_event.GetEntry(q);
-        chain_rpd.GetEntry(q);
-        for(int k = 0; k < 4; k++){
-            ZDCchain[k]->GetEntry(q);
+        // Retrieve entry from trees
+        Event_Chain.GetEntry(q);
+        RPD_Chain.GetEntry(q);
+        for (int i = 0; i < 4; i++){
+            ZDC_Chain[i]->GetEntry(q);
         }
 
-        for( int mod = 0; mod < 4; mod++){//start module loop
-            for (int hit=0; hit < zdcRodNb[mod]->size() ; hit++){//start hit loop
-
-                if(mod==0) 	EM_seg[EM_LONG_SEG(zdcRodNb[mod]->at(hit))]++;
-                else 				HAD_seg[HAD_LONG_SEG(zdcRodNb[mod]->at(hit), mod)]++;
-
-            }//end hit loop
-        }//end module loop
-
-        trackID		= q;
-
+        // Module Loop for EM + HAD1,2,3 modules
+        for (int mod = 0; mod < 4; mod++){
+            for (int hit = 0; hit < zdcRodNb[mod]->size(); hit++){
+                if (mod == 0) {
+                    EM_Seg[EM_LONG_SEG(zdcRodNb[mod]->at(hit))]++;
+                    EM_Rows[EM_Z_SEG(zdcRodNb[mod]->at(hit))]++;
+                }
+                else {
+                    HAD_Seg[HAD_LONG_SEG(zdcRodNb[mod]->at(hit), mod)]++;
+                    HAD_Rows[HAD_Z_SEG(zdcRodNb[mod]->at(hit))]++;
+                }
+            }
+        }
+        trackID = q;
         tOut->Fill();
 
-        //zero arrays
-        for (int i=0; i < 6 ; i++){
-            if(i<3) EM_seg[i] 	  = 0;
-            HAD_seg[i] 						= 0;
+        //Zero arrays again for next loop
+        for (int i = 0; i < 26; i++) {
+            if (i < 10) {
+                if (i < 6) {
+                    if (i < 3) {
+                        EM_Seg[i] = 0;
+                    }
+                    HAD_Seg[i] = 0;
+                }
+                HAD_Rows[i] = 0;
+            }
+            EM_Rows[i] = 0;
         }
-
-    }//end event loop
-
+    }
     fOut->Write();
-
 }
