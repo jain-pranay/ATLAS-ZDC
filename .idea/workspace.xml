@@ -6,8 +6,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Added Pre-existing Files">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Configured .gitignore to ignore ROOT files.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/ZConverter.C" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,13 +36,6 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,6 +45,8 @@
       <option name="presentableId" value="Default" />
       <updated>1621940235170</updated>
       <workItem from="1621940240128" duration="377000" />
+      <workItem from="1621940685068" duration="74000" />
+      <workItem from="1621940895113" duration="36000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -59,7 +55,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621940398799</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Configured .gitignore to ignore ROOT files.">
+      <created>1621940713884</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621940713885</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -75,9 +78,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Pre-existing Files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Pre-existing Files" />
+    <MESSAGE value="Configured .gitignore to ignore ROOT files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Configured .gitignore to ignore ROOT files." />
   </component>
 </project>
