@@ -6,9 +6,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="C++ analysis files moved inside Root Analysis directory.">
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Fixed checkstyle, array zero-ing etc. EM_Rows not working, HAD_rows not working.">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +19,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1t1crHuKm9GxGhcm5m8u0oUkAtr" />
@@ -41,13 +42,6 @@
       <recent name="$PROJECT_DIR$/Root Analysis" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,6 +55,7 @@
       <workItem from="1621940895113" duration="276000" />
       <workItem from="1621941267319" duration="201000" />
       <workItem from="1621942031345" duration="2554000" />
+      <workItem from="1621950764214" duration="779000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -97,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621942092431</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed checkstyle, array zero-ing etc. EM_Rows not working, HAD_rows not working.">
+      <created>1621950830117</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621950830117</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +123,7 @@
     <MESSAGE value="Commit Test" />
     <MESSAGE value="Whitespace/Readability" />
     <MESSAGE value="C++ analysis files moved inside Root Analysis directory." />
-    <option name="LAST_COMMIT_MESSAGE" value="C++ analysis files moved inside Root Analysis directory." />
+    <MESSAGE value="Fixed checkstyle, array zero-ing etc. EM_Rows not working, HAD_rows not working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed checkstyle, array zero-ing etc. EM_Rows not working, HAD_rows not working." />
   </component>
 </project>
