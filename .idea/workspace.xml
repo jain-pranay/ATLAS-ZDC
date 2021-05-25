@@ -6,9 +6,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Configured .gitignore to ignore ROOT files.">
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Whitespace/Readability">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/ZConverter.C" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +45,8 @@
       <updated>1621940235170</updated>
       <workItem from="1621940240128" duration="377000" />
       <workItem from="1621940685068" duration="74000" />
-      <workItem from="1621940895113" duration="36000" />
+      <workItem from="1621940895113" duration="276000" />
+      <workItem from="1621941267319" duration="201000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -62,7 +62,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621940713885</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Commit Test">
+      <created>1621940953148</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1621940953148</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Whitespace/Readability">
+      <created>1621941163214</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1621941163214</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,6 +97,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Pre-existing Files" />
     <MESSAGE value="Configured .gitignore to ignore ROOT files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Configured .gitignore to ignore ROOT files." />
+    <MESSAGE value="Commit Test" />
+    <MESSAGE value="Whitespace/Readability" />
+    <option name="LAST_COMMIT_MESSAGE" value="Whitespace/Readability" />
   </component>
 </project>
