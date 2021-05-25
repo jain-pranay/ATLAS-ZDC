@@ -76,7 +76,7 @@ void Run4TreeConverter() {
     // Output Tree Variables
     vector<double> *LastStepInVolume = 0;
     vector<int> *RPD_nCherenkovs = 0;
-    vector < vector < int > * > zdcRodNb;
+    vector<vector<int>*> zdcRodNb;
     vector<int> rodNum;
     zdcRodNb.resize(4);
 
@@ -176,9 +176,5 @@ void Run4TreeConverter() {
         }
 
     }//end event loop
-
     fOut->Write();
-
 }
-
-// reverse commit test
