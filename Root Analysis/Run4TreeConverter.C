@@ -16,10 +16,10 @@ using namespace std;
 // 28 rods per gap
 // long_seg:row_start-row_stop = EM1:0-7, EM2:8-16, EM3:17-24 (arbitrary selection)
 int EM_LONG_SEG(int rodnum){
-    int seg, row = rodnum/28;
+    int seg, row = rodnum / 29;
     if (row < 8) {
         seg = 0;
-    } else if (row<17) {
+    } else if (row < 17) {
         seg = 1;
     } else {
         seg = 2;
@@ -31,7 +31,7 @@ int EM_LONG_SEG(int rodnum){
 // 28 rods per gap
 // long_seg:row_start-row_stop = HAD1:0-5, HAD2:6-11, HAD3:12-17, HAD4:18-23, HAD5:24-29, HAD6:30-35
 int HAD_LONG_SEG(int rodnum, int modnum){
-    int seg, row = rodnum / 28;
+    int seg, row = rodnum / 29;
     seg = row / 6;
     return seg + ((modnum - 1) * 2);
 }
@@ -47,7 +47,7 @@ int EM_Z_SEG(int rodNum) {
 // Segments any given rodNum into row number within the HAD Modules
 // RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
 int HAD_Z_SEG(int rodNum) {
-    int rowNum, RODS_PER_ROW = 10;
+    int rowNum, RODS_PER_ROW = 29;
     rowNum = rodNum / RODS_PER_ROW;
     return rowNum;
 }
@@ -75,14 +75,12 @@ void Run4TreeConverter() {
     vector<int> *EM_nCherenkovs = 0;
     vector<int> *HAD_nCherenkovs = 0;
     vector<vector<int>*> zdcRodNb;
-    vector<int> *rowem = 0;
-    vector<int> *hadem = 0;
+    vector<int> *EM_Row = 0;
+    vector<int> *HAD_Row = 0;
     vector<int> rodNum;
     zdcRodNb.resize(4);
 
     int trackID = 0;
-    int EM_Rows[26] = {0};
-    int HAD_Rows[10] = {0};
     double EM_Seg[3] = {0};
     double HAD_Seg[6] = {0};
     double energy = 0;
@@ -94,8 +92,8 @@ void Run4TreeConverter() {
     tOut->Branch("RPD_nCherenkovs", &RPD_nCherenkovs);
     tOut->Branch("EM_nCherenkovs", &EM_nCherenkovs);
     tOut->Branch("HAD_nCherenkovs", &HAD_nCherenkovs);
-    tOut->Branch("rowem", &rowem);
-    tOut->Branch("hadem", &hadem);
+    tOut->Branch("EM_Row", &EM_Row);
+    tOut->Branch("HAD_Row", &HAD_Row);
 
     // Standard Branches
     tOut->Branch("Energy", &energy, "Energy/D");
@@ -104,8 +102,6 @@ void Run4TreeConverter() {
     // Array Branches
     tOut->Branch("EM_Seg", EM_Seg, "EM_Seg[3]/D");
     tOut->Branch("HAD_Seg", HAD_Seg, "HAD_Seg[6]/D");
-    tOut->Branch("EM_Rows", EM_Rows, "EM_Rows[26]/I");
-    tOut->Branch("HAD_Rows", HAD_Rows, "HAD_Rows[10]/I");
 
     // Setting up and reading  input tree
     // EventData contains information related to the primary particle
@@ -133,17 +129,11 @@ void Run4TreeConverter() {
     }
 
     // Ensure all arrays are zeroed
-    for (int i = 0; i < 26; i++) {
-        if (i < 10) {
-            if (i < 6) {
-                if (i < 3) {
-                    EM_Seg[i] = 0;
-                }
-                HAD_Seg[i] = 0;
-            }
-            HAD_Rows[i] = 0;
+    for (int i = 0; i < 6; i++) {
+        if (i < 3) {
+            EM_Seg[i] = 0;
         }
-        EM_Rows[i] = 0;
+        HAD_Seg[i] = 0;
     }
 
     //Set addresses for tree variables
@@ -174,38 +164,32 @@ void Run4TreeConverter() {
         // Module Loop for EM + HAD1,2,3 modules
         for (int mod = 0; mod < 4; mod++){
             for (int hit = 0; hit < zdcRodNb[mod]->size(); hit++){
+                // EM Module Processing
                 if (mod == 0) {
                     EM_Seg[EM_LONG_SEG(zdcRodNb[mod]->at(hit))]++;
-                    EM_Rows[EM_Z_SEG(zdcRodNb[mod]->at(hit))]++;
-                    rowem->push_back(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
+                    EM_Row->push_back(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
                 }
+                // HAD Modules Processing
                 else {
                     HAD_Seg[HAD_LONG_SEG(zdcRodNb[mod]->at(hit), mod)]++;
-                    HAD_Rows[HAD_Z_SEG(zdcRodNb[mod]->at(hit))]++;
-                    hadem->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)));
+                    if (mod == 1) HAD_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit))); // Indexes row 0-11 as HAD1 module.
+                    if (mod == 2) HAD_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 12); // Indexes row 12-23 as HAD2 module.
+                    if (mod == 3) HAD_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 24); // Indexes row 24-35 as HAD3 module.
                 }
             }
         }
         trackID = q;
         tOut->Fill();
 
-        // Zero arrays again for next loop
-        for (int i = 0; i < 26; i++) {
-            if (i < 10) {
-                if (i < 6) {
-                    if (i < 3) {
-                        EM_Seg[i] = 0;
-                    }
-                    HAD_Seg[i] = 0;
-                }
-                HAD_Rows[i] = 0;
+        // Zero data structures again for next iteration
+        for (int i = 0; i < 6; i++) {
+            if (i < 3) {
+                EM_Seg[i] = 0;
             }
-            EM_Rows[i] = 0;
+            HAD_Seg[i] = 0;
         }
-        for (int i =0; i < rowem->size(); i++) {
-            rowem->at(i) = 0;
-        }
-
+        EM_Row->clear();
+        HAD_Row->clear();
     }
     fOut->Write();
 }
