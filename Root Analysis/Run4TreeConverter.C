@@ -27,7 +27,7 @@ int EM_LONG_SEG(int rodnum){
     return seg;
 }
 
-// 12 radiator gaps in each hadronic module (6 per segment), and 3 hadronic modules for a total of 36 hadronic gaps (6 total segments)
+// 12 radiator gaps in each hadron module (6 per segment), and 3 hadron modules for a total of 36 hadron gaps (6 total segments)
 // 28 rods per gap
 // long_seg:row_start-row_stop = HAD1:0-5, HAD2:6-11, HAD3:12-17, HAD4:18-23, HAD5:24-29, HAD6:30-35
 int HAD_LONG_SEG(int rodnum, int modnum){
@@ -72,22 +72,30 @@ void Run4TreeConverter() {
     // Output Tree Variables
     vector<double> *LastStepInVolume = 0;
     vector<int>	*RPD_nCherenkovs = 0;
+    vector<int> *EM_nCherenkovs = 0;
+    vector<int> *HAD_nCherenkovs = 0;
     vector<vector<int>*> zdcRodNb;
+    vector<int> *rowem = 0;
+    vector<int> *hadem = 0;
     vector<int> rodNum;
     zdcRodNb.resize(4);
 
-    int trackID;
-    int EM_Rows[26];
-    int HAD_Rows[10];
-    double EM_Seg[3];
-    double HAD_Seg[6];
-    double energy;
+    int trackID = 0;
+    int EM_Rows[26] = {0};
+    int HAD_Rows[10] = {0};
+    double EM_Seg[3] = {0};
+    double HAD_Seg[6] = {0};
+    double energy = 0;
 
 
     // Output Tree Branches
     // Vector Branches
     tOut->Branch("LastStepZ", &LastStepInVolume);
-    tOut->Branch("RPD_nCherenkov", &RPD_nCherenkovs);
+    tOut->Branch("RPD_nCherenkovs", &RPD_nCherenkovs);
+    tOut->Branch("EM_nCherenkovs", &EM_nCherenkovs);
+    tOut->Branch("HAD_nCherenkovs", &HAD_nCherenkovs);
+    tOut->Branch("rowem", &rowem);
+    tOut->Branch("hadem", &hadem);
 
     // Standard Branches
     tOut->Branch("Energy", &energy, "Energy/D");
@@ -143,13 +151,18 @@ void Run4TreeConverter() {
     RPD_Chain.SetBranchAddress("nCherenkovs", &RPD_nCherenkovs);
     for (int i = 0; i < 4; i++) {
         ZDC_Chain[i]->SetBranchAddress("rodNo", &zdcRodNb[i]);
+        if (i == 0) {
+            ZDC_Chain[i]->SetBranchAddress("nCherenkovs", &EM_nCherenkovs);
+        } else {
+            ZDC_Chain[i]->SetBranchAddress("nCherenkovs", &HAD_nCherenkovs);
+        }
     }
 
     int nEntries = ZDC_Chain[0]->GetEntries();
 
     // Loop over number of entries (events set per job)
-    for (int q = 0; q< nEntries; q++) {
-        if (q % 5 == 0) cout << "\r" << left << Form("Processing event %d of %d", q, nEntries) << flush << endl;
+    for (int q = 0; q < nEntries; q++) {
+        cout << "\r" << left << Form("Processing event %d of %d", q, nEntries) << flush << endl;
 
         // Retrieve entry from trees
         Event_Chain.GetEntry(q);
@@ -164,17 +177,19 @@ void Run4TreeConverter() {
                 if (mod == 0) {
                     EM_Seg[EM_LONG_SEG(zdcRodNb[mod]->at(hit))]++;
                     EM_Rows[EM_Z_SEG(zdcRodNb[mod]->at(hit))]++;
+                    rowem->push_back(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
                 }
                 else {
                     HAD_Seg[HAD_LONG_SEG(zdcRodNb[mod]->at(hit), mod)]++;
                     HAD_Rows[HAD_Z_SEG(zdcRodNb[mod]->at(hit))]++;
+                    hadem->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)));
                 }
             }
         }
         trackID = q;
         tOut->Fill();
 
-        //Zero arrays again for next loop
+        // Zero arrays again for next loop
         for (int i = 0; i < 26; i++) {
             if (i < 10) {
                 if (i < 6) {
@@ -187,6 +202,10 @@ void Run4TreeConverter() {
             }
             EM_Rows[i] = 0;
         }
+        for (int i =0; i < rowem->size(); i++) {
+            rowem->at(i) = 0;
+        }
+
     }
     fOut->Write();
 }

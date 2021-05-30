@@ -1,8 +1,7 @@
 //
 // Created by Pranay Jain on 25/05/21.
 //
-
-// Tree Converter File for Test Beam 2021
+// EM Segmentation Test
 
 #include <iostream>
 #include <TTree.h>
@@ -15,30 +14,6 @@
 #include "TBox.h"
 
 using namespace std;
-
-// 25 radiator gaps in an EM module (cannot divide evenly by 3 longitudinal segments)
-// 28 rods per gap
-// long_seg:row_start-row_stop = EM1:0-7, EM2:8-16, EM3:17-24 (arbitrary selection)
-int EM_LONG_SEG(int rodnum) {
-    int seg, row = rodnum / 28;
-    if (row < 8) {
-        seg = 0;
-    } else if (row < 17) {
-        seg = 1;
-    } else {
-        seg = 2;
-    }
-    return seg;
-}
-
-// 12 radiator gaps in each hadronic module (6 per segment), and 3 hadronic modules for a total of 36 hadronic gaps (6 total segments)
-// 28 rods per gap
-// long_seg:row_start-row_stop = HAD1:0-5, HAD2:6-11, HAD3:12-17, HAD4:18-23, HAD5:24-29, HAD6:30-35
-int HAD_LONG_SEG(int rodnum, int modnum) {
-    int seg, row = rodnum / 28;
-    seg = row / 6;
-    return seg + ((modnum - 1) * 2);
-}
 
 // Segments any given rodNum into row number within the EM Module
 // RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
@@ -56,7 +31,7 @@ int HAD_Z_SEG(int rodNum) {
     return rowNum;
 }
 
-void Run4TreeConverter() {
+void ZConverter() {
 
     // File Processing
     // Enter full filename, including .root, followed by a space and then number of consecutive files.
@@ -145,11 +120,11 @@ void Run4TreeConverter() {
 
     int nEntries = ZDCchain[0]->GetEntries();
 
-    // Begin loop over events -------------------------------------------------------------------------
+    // Begin loop over events
     for (int q = 0; q < nEntries; q++) {
         if (q % 10 == 0) cout << "\r" << left << Form("Processing event %d of %d", q, nEntries) << flush << endl;
 
-        // Retrieve entry from trees -------------------------------------------------------------------------
+        // Retrieve entry from trees
         chain_event.GetEntry(q);
         chain_rpd.GetEntry(q);
         for (int k = 0; k < 4; k++) {
@@ -158,12 +133,23 @@ void Run4TreeConverter() {
 
         for (int mod = 0; mod < 4; mod++) {//start module loop
             for (int hit = 0; hit < zdcRodNb[mod]->size(); hit++) {//start hit loop
-
-                if (mod == 0) EM_seg[EM_LONG_SEG(zdcRodNb[mod]->at(hit))]++;
-                else HAD_seg[HAD_LONG_SEG(zdcRodNb[mod]->at(hit), mod)]++;
+                if (mod == 0) {
+                    // EM Z segmentation
+                    int hit_row = EM_Z_SEG(zdcRodNb[mod]->at(hit));
+                    EM_rows[hit_row]++;
+                } else {
+                    // HAD Z segmentation
+                }
 
             }//end hit loop
         }//end module loop
+
+        int sumRows = 0;
+        for (int i = -1; i < 27; i++) {
+            cout << "Row " << i << ": " << EM_rows[i] << endl;
+            sumRows += EM_rows[i];
+        }
+        cout << sumRows << endl;
 
         trackID = q;
 
