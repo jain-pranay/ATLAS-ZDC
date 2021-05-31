@@ -52,6 +52,14 @@ int HAD_Z_SEG(int rodNum) {
     return rowNum;
 }
 
+// Segments any given rodNum into column number with the EM and HAD Modules (works with both)
+// RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
+int MOD_X_SEG(int rodNum) {
+    int columnNum, RODS_PER_ROW = 29;
+    columnNum = rodNum % RODS_PER_ROW;
+    return columnNum;
+}
+
 void Run4TreeConverter() {
 
     // File Processing
@@ -77,7 +85,11 @@ void Run4TreeConverter() {
     vector<vector<int>*> zdcRodNb;
     vector<int> *EM_Row = 0;
     vector<int> *HAD_Row = 0;
+    vector<int> *EM_Column = 0;
+    vector<int> *HAD_Column = 0;
     vector<int> *Total_Row = 0;
+    vector<int> *Total_Column = 0;
+
     vector<int> rodNum;
     zdcRodNb.resize(4);
 
@@ -95,7 +107,10 @@ void Run4TreeConverter() {
     tOut->Branch("HAD_nCherenkovs", &HAD_nCherenkovs);
     tOut->Branch("EM_Row", &EM_Row);
     tOut->Branch("HAD_Row", &HAD_Row);
+    tOut->Branch("EM_Column", &EM_Column);
+    tOut->Branch("HAD_Column", &HAD_Column);
     tOut->Branch("Total_Row", &Total_Row);
+    tOut->Branch("Total_Column", &Total_Column);
 
     // Standard Branches
     tOut->Branch("Energy", &energy, "Energy/D");
@@ -170,22 +185,30 @@ void Run4TreeConverter() {
                 if (mod == 0) {
                     EM_Seg[EM_LONG_SEG(zdcRodNb[mod]->at(hit))]++;
                     EM_Row->push_back(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
+                    EM_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                     Total_Row->push_back(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
+                    Total_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                 }
                 // HAD Modules Processing
                 else {
                     HAD_Seg[HAD_LONG_SEG(zdcRodNb[mod]->at(hit), mod)]++;
                     if (mod == 1) {
                         HAD_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit))); // Indexes row 0-11 as HAD1 module.
+                        HAD_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                         Total_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 26);
+                        Total_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                     }
                     if (mod == 2) {
                         HAD_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 12); // Indexes row 12-23 as HAD2 module.
+                        HAD_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                         Total_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 12 + 26);
+                        Total_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                     }
                     if (mod == 3) {
                         HAD_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 24); // Indexes row 24-35 as HAD3 module.
+                        HAD_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                         Total_Row->push_back(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 24 + 26);
+                        Total_Column->push_back(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
                     }
                 }
             }
@@ -202,7 +225,10 @@ void Run4TreeConverter() {
         }
         EM_Row->clear();
         HAD_Row->clear();
+        EM_Column->clear();
+        HAD_Column->clear();
         Total_Row->clear();
+        Total_Column->clear();
     }
     fOut->Write();
 }
