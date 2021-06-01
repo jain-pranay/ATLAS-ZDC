@@ -7,9 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Implements column mechanic for X-axis segmentation in EM modules, HAD modules and a Total X-segmentation.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Root Analysis/ZConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/ZConverter.C" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +63,10 @@
       <workItem from="1622392104453" duration="666000" />
       <workItem from="1622474661178" duration="3426000" />
       <workItem from="1622480879378" duration="37000" />
+      <workItem from="1622492207821" duration="569000" />
+      <workItem from="1622540632011" duration="502000" />
+      <workItem from="1622562524480" duration="1301000" />
+      <workItem from="1622565090843" duration="38000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>

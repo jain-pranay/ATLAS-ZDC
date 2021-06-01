@@ -9,3 +9,6 @@
 
 #Ignore ROOT Files
 *.root
+
+#Ignore Documents Directory
+/Documents
