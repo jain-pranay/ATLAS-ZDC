@@ -6,10 +6,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline().">
-      <change afterPath="$PROJECT_DIR$/Root Analysis/TreeExporter.C" afterDir="false" />
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files.">
+      <change afterPath="$PROJECT_DIR$/Root Analysis/TestBeamTreeConverter.C" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Root Analysis/TreeExport.C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +45,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -76,7 +77,8 @@
       <workItem from="1622565090843" duration="38000" />
       <workItem from="1622565202304" duration="728000" />
       <workItem from="1622615747863" duration="248000" />
-      <workItem from="1622616560444" duration="5109000" />
+      <workItem from="1622616560444" duration="5332000" />
+      <workItem from="1622640267373" duration="5003000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -176,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622618788617</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files.">
+      <created>1622622369594</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1622622369594</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +217,7 @@
     <MESSAGE value="- Configured .gitignore to ignore Documents directory." />
     <MESSAGE value="- Added TreeExport.C&#10;- TODO: Work on a command line tool that converts all necessary data into an compressed image format (pdf/png)." />
     <MESSAGE value="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline()." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline()." />
+    <MESSAGE value="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files." />
+    <option name="LAST_COMMIT_MESSAGE" value="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files." />
   </component>
 </project>

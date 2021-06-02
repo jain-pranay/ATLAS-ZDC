@@ -9,6 +9,7 @@
 
 #Ignore ROOT Files
 *.root
+*.pdf
 
 #Ignore Documents Directory
 /Documents
