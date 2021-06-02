@@ -6,11 +6,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Added TreeExport.C&#10;- TODO: Work on a command line tool that converts all necessary data into an compressed image format (pdf/png).">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline().">
+      <change afterPath="$PROJECT_DIR$/Root Analysis/TreeExporter.C" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Root Analysis/TreeExport.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/TreeExport.C" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Root Analysis/TreeExport.C" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +76,7 @@
       <workItem from="1622565090843" duration="38000" />
       <workItem from="1622565202304" duration="728000" />
       <workItem from="1622615747863" duration="248000" />
-      <workItem from="1622616560444" duration="1796000" />
+      <workItem from="1622616560444" duration="5109000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -170,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622616690674</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline().">
+      <created>1622618788617</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1622618788617</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +207,7 @@
     <MESSAGE value="- Implements column mechanic for X-axis segmentation in EM modules, HAD modules and a Total X-segmentation." />
     <MESSAGE value="- Configured .gitignore to ignore Documents directory." />
     <MESSAGE value="- Added TreeExport.C&#10;- TODO: Work on a command line tool that converts all necessary data into an compressed image format (pdf/png)." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added TreeExport.C&#10;- TODO: Work on a command line tool that converts all necessary data into an compressed image format (pdf/png)." />
+    <MESSAGE value="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline()." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline()." />
   </component>
 </project>
