@@ -64,12 +64,12 @@ void Run4TreeConverter() {
 
     // File Processing
     // Enter full filename, including .root, followed by a space and then number of consecutive files.
-    string input;
+    string filename;
+    int num_files;
 
     cout << "Enter Filename, Number of Consecutive Files" << endl;
-    getline(cin, input);
-    string filename = input.substr(0, input.find_first_of(" "));
-    int num_files = stoi(input.substr(input.find_first_of(" ") + 1));
+    cin >> filename >> num_files;
+
 
     if (filename.find(".") != string::npos) filename.erase(filename.find_last_of("."));
     if (filename.find(".") != string::npos) filename.erase(filename.find_last_of("."));
