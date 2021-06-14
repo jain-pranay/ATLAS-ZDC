@@ -6,11 +6,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files.">
-      <change afterPath="$PROJECT_DIR$/Root Analysis/TestBeamTreeConverter.C" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Created TestBeamTreeConverter.C that saves the x and z-segmentation of the HAD and EM modules as histograms instead of vector branches.">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/Run4TreeConverter.C" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Root Analysis/TestBeamTreeConverter.C" beforeDir="false" afterPath="$PROJECT_DIR$/Root Analysis/TestBeamTreeConverter.C" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +43,6 @@
       <recent name="$PROJECT_DIR$/Root Analysis" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -78,7 +70,8 @@
       <workItem from="1622565202304" duration="728000" />
       <workItem from="1622615747863" duration="248000" />
       <workItem from="1622616560444" duration="5332000" />
-      <workItem from="1622640267373" duration="5003000" />
+      <workItem from="1622640267373" duration="5738000" />
+      <workItem from="1623669162785" duration="4307000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -185,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622622369594</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="- Created TestBeamTreeConverter.C that saves the x and z-segmentation of the HAD and EM modules as histograms instead of vector branches.">
+      <created>1622649363959</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1622649363959</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +218,7 @@
     <MESSAGE value="- Added TreeExport.C&#10;- TODO: Work on a command line tool that converts all necessary data into an compressed image format (pdf/png)." />
     <MESSAGE value="- Streamlined file processing in Run4TreeConverter.C with std::cin instead of getline()." />
     <MESSAGE value="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files." />
-    <option name="LAST_COMMIT_MESSAGE" value="- TreeExporter.C completed. Input which branches to convert to pdf within the file. Running in batch mode without graphics will create PDF files." />
+    <MESSAGE value="- Created TestBeamTreeConverter.C that saves the x and z-segmentation of the HAD and EM modules as histograms instead of vector branches." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Created TestBeamTreeConverter.C that saves the x and z-segmentation of the HAD and EM modules as histograms instead of vector branches." />
   </component>
 </project>

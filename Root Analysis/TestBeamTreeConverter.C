@@ -23,15 +23,21 @@ int EM_Z_SEG(int rodNum) {
 // Segments any given rodNum into row number within the HAD Modules
 // RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
 int HAD_Z_SEG(int rodNum) {
-    int rowNum, RODS_PER_ROW = 29;
+    int rowNum, RODS_PER_ROW = 59;
     rowNum = rodNum / RODS_PER_ROW;
     return rowNum;
 }
 
 // Segments any given rodNum into column number with the EM and HAD Modules (works with both)
 // RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
-int MOD_X_SEG(int rodNum) {
+int EM_X_SEG(int rodNum) {
     int columnNum, RODS_PER_ROW = 29;
+    columnNum = rodNum % RODS_PER_ROW;
+    return columnNum;
+}
+
+int HAD_X_SEG(int rodNum) {
+    int columnNum, RODS_PER_ROW = 59;
     columnNum = rodNum % RODS_PER_ROW;
     return columnNum;
 }
@@ -62,10 +68,14 @@ void TestBeamTreeConverter() {
 
     TH1I *EM_Row = new TH1I("EM_Row", "EM_Row", 11, 0, 11);
     TH1I *EM_Column = new TH1I("EM_Column", "EM_Column", 29, 0, 29);
-    TH1I *HAD_Row = new TH1I("HAD_Row", "HAD_Row", 35, 0, 35);
+    TH1I *HAD_Row = new TH1I("HAD_Row", "HAD_Row", 36, 0, 36);
     TH1I *HAD_Column = new TH1I("HAD_Column", "HAD_Column", 29, 0, 29);
-    TH1I *Total_Row = new TH1I("Total_Row", "Total_Row", 46, 0, 46);
+    TH1I *Total_Row = new TH1I("Total_Row", "Total_Row", 47, 0, 47);
     TH1I *Total_Column = new TH1I("Total_Column", "Total_Column", 29, 0, 29);
+
+    TH2I *EM_Cone = new TH2I("EM_Cone", "EM_Cone", 11, 0, 11, 29, 0, 29);
+    TH2I *HAD_Cone = new TH2I("HAD_Cone", "HAD_Cone", 47, 0, 47, 59, 0, 59);
+    gStyle->SetPalette(kRainBow);
 
     int trackID = 0;
 
@@ -82,6 +92,8 @@ void TestBeamTreeConverter() {
     tOut->Branch("HAD_Column", &HAD_Column);
     tOut->Branch("Total_Row", &Total_Row);
     tOut->Branch("Total_Column", &Total_Column);
+    tOut->Branch("EM_Cone", &EM_Cone);
+    tOut->Branch("HAD_Cone", &HAD_Cone);
 
     // Standard Branches
     tOut->Branch("TrackID", &trackID, "TrackID/I");
@@ -143,29 +155,37 @@ void TestBeamTreeConverter() {
                 // EM Module Processing
                 if (mod == 0) {
                     EM_Row->Fill(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
-                    EM_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                    EM_Column->Fill(EM_X_SEG(zdcRodNb[mod]->at(hit)));
                     Total_Row->Fill(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
-                    Total_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                    Total_Column->Fill(EM_X_SEG(zdcRodNb[mod]->at(hit)));
+
+                    EM_Cone->Fill(EM_Z_SEG(zdcRodNb[mod]->at(hit)), EM_X_SEG(zdcRodNb[mod]->at(hit)));
                 }
                     // HAD Modules Processing
                 else {
                     if (mod == 1) {
                         HAD_Row->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit))); // Indexes row 0-11 as HAD1 module.
-                        HAD_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                        HAD_Column->Fill(HAD_X_SEG(zdcRodNb[mod]->at(hit)));
                         Total_Row->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 11);
-                        Total_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                        Total_Column->Fill(HAD_X_SEG(zdcRodNb[mod]->at(hit)));
+
+                        HAD_Cone->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)), HAD_X_SEG(zdcRodNb[mod]->at(hit)));
                     }
                     if (mod == 2) {
                         HAD_Row->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 12); // Indexes row 12-23 as HAD2 module.
-                        HAD_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                        HAD_Column->Fill(HAD_X_SEG(zdcRodNb[mod]->at(hit)));
                         Total_Row->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 12 + 11);
-                        Total_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                        Total_Column->Fill(HAD_X_SEG(zdcRodNb[mod]->at(hit)));
+
+                        HAD_Cone->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 12, HAD_X_SEG(zdcRodNb[mod]->at(hit)));
                     }
                     if (mod == 3) {
                         HAD_Row->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 24); // Indexes row 24-35 as HAD3 module.
-                        HAD_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                        HAD_Column->Fill(HAD_X_SEG(zdcRodNb[mod]->at(hit)));
                         Total_Row->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 24 + 11);
-                        Total_Column->Fill(MOD_X_SEG(zdcRodNb[mod]->at(hit)));
+                        Total_Column->Fill(HAD_X_SEG(zdcRodNb[mod]->at(hit)));
+
+                        HAD_Cone->Fill(HAD_Z_SEG(zdcRodNb[mod]->at(hit)) + 24, HAD_X_SEG(zdcRodNb[mod]->at(hit)));
                     }
                 }
             }
