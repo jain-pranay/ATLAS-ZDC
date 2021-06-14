@@ -6,7 +6,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Reconfigured rods per row for TestBeam2021 setup. &#10;- Implemented shower cones for both EM and HAD sections." />
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="- Reconfigured rods per row for TestBeam2021 setup. &#10;- Implemented shower cones for both EM and HAD sections.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +69,7 @@
       <workItem from="1622615747863" duration="248000" />
       <workItem from="1622616560444" duration="5332000" />
       <workItem from="1622640267373" duration="5738000" />
-      <workItem from="1623669162785" duration="4790000" />
+      <workItem from="1623669162785" duration="5660000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>

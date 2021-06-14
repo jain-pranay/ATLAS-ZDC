@@ -13,7 +13,7 @@
 using namespace std;
 
 // Segments any given rodNum into row number within the EM Module
-// RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
+// RODS_PER_ROW = number of rods in a single row. For TestBeam2021 config, 29 rods.
 int EM_Z_SEG(int rodNum) {
     int rowNum, RODS_PER_ROW = 29;
     rowNum = rodNum / RODS_PER_ROW;
@@ -21,7 +21,7 @@ int EM_Z_SEG(int rodNum) {
 }
 
 // Segments any given rodNum into row number within the HAD Modules
-// RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
+// RODS_PER_ROW = number of rods in a single row. For TestBeam2021 config, 59 rods.
 int HAD_Z_SEG(int rodNum) {
     int rowNum, RODS_PER_ROW = 59;
     rowNum = rodNum / RODS_PER_ROW;
@@ -74,7 +74,7 @@ void TestBeamTreeConverter() {
     TH1I *Total_Column = new TH1I("Total_Column", "Total_Column", 59, 0, 59);
 
     TH2I *EM_Cone = new TH2I("EM_Cone", "EM_Cone", 11, 0, 11, 29, 0, 29);
-    TH2I *HAD_Cone = new TH2I("HAD_Cone", "HAD_Cone", 47, 0, 47, 59, 0, 59);
+    TH2I *HAD_Cone = new TH2I("HAD_Cone", "HAD_Cone", 36, 0, 36, 59, 0, 59);
     gStyle->SetPalette(kRainBow);
 
     int trackID = 0;
