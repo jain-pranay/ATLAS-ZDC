@@ -28,14 +28,16 @@ int HAD_Z_SEG(int rodNum) {
     return rowNum;
 }
 
-// Segments any given rodNum into column number with the EM and HAD Modules (works with both)
-// RODS_PER_ROW = number of rods in a single row. For RUN4 config, 29 rods.
+// Segments any given rodNum into column number for EM Modules
+// RODS_PER_ROW = number of rods in a single row. For TestBeam2021 config, 29 rods.
 int EM_X_SEG(int rodNum) {
     int columnNum, RODS_PER_ROW = 29;
     columnNum = rodNum % RODS_PER_ROW;
     return columnNum;
 }
 
+// Segments any given rodNum into column number for HAD Modules
+// RODS_PER_ROW = number of rods in a single row. For TestBeam2021 config, 59 rods.
 int HAD_X_SEG(int rodNum) {
     int columnNum, RODS_PER_ROW = 59;
     columnNum = rodNum % RODS_PER_ROW;
