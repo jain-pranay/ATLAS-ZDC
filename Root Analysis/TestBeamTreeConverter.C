@@ -69,9 +69,9 @@ void TestBeamTreeConverter() {
     TH1I *EM_Row = new TH1I("EM_Row", "EM_Row", 11, 0, 11);
     TH1I *EM_Column = new TH1I("EM_Column", "EM_Column", 29, 0, 29);
     TH1I *HAD_Row = new TH1I("HAD_Row", "HAD_Row", 36, 0, 36);
-    TH1I *HAD_Column = new TH1I("HAD_Column", "HAD_Column", 29, 0, 29);
+    TH1I *HAD_Column = new TH1I("HAD_Column", "HAD_Column", 59, 0, 59);
     TH1I *Total_Row = new TH1I("Total_Row", "Total_Row", 47, 0, 47);
-    TH1I *Total_Column = new TH1I("Total_Column", "Total_Column", 29, 0, 29);
+    TH1I *Total_Column = new TH1I("Total_Column", "Total_Column", 59, 0, 59);
 
     TH2I *EM_Cone = new TH2I("EM_Cone", "EM_Cone", 11, 0, 11, 29, 0, 29);
     TH2I *HAD_Cone = new TH2I("HAD_Cone", "HAD_Cone", 47, 0, 47, 59, 0, 59);
@@ -157,7 +157,7 @@ void TestBeamTreeConverter() {
                     EM_Row->Fill(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
                     EM_Column->Fill(EM_X_SEG(zdcRodNb[mod]->at(hit)));
                     Total_Row->Fill(EM_Z_SEG(zdcRodNb[mod]->at(hit)));
-                    Total_Column->Fill(EM_X_SEG(zdcRodNb[mod]->at(hit)));
+                    Total_Column->Fill(EM_X_SEG(zdcRodNb[mod]->at(hit)) + 15);
 
                     EM_Cone->Fill(EM_Z_SEG(zdcRodNb[mod]->at(hit)), EM_X_SEG(zdcRodNb[mod]->at(hit)));
                 }
