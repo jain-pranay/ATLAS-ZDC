@@ -44,6 +44,24 @@ int HAD_X_SEG(int rodNum) {
     return columnNum;
 }
 
+// Segments RPD hits into row and column for plotting onto a histogram
+int RPD_ROW_SEG(int rodNum) {
+    int nRods = 256;
+    int nRodsPerRow  = nRods / 4;
+    int nRodsPerTile = nRods / 16;
+
+    int row = rodNum / nRodsPerRow;
+    return row;
+}
+int RPD_COL_SEG(int rodNum) {
+    int nRods = 256;
+    int nRodsPerRow  = nRods / 4;
+    int nRodsPerTile = nRods / 16;
+
+    int column = (rodNum % nRodsPerRow) / nRodsPerTile;
+    return column;
+}
+
 void TestBeamTreeConverter() {
 
     // File Processing
@@ -66,6 +84,7 @@ void TestBeamTreeConverter() {
     vector<int>	*RPD_nCherenkovs = 0;
     vector<int> *EM_nCherenkovs = 0;
     vector<int> *HAD_nCherenkovs = 0;
+    vector<int> *RPDRodNb = 0;
     vector<vector<int>*> zdcRodNb(4);
 
     TH1I *EM_Row = new TH1I("EM_Row", "EM_Row", 11, 0, 11);
@@ -75,6 +94,7 @@ void TestBeamTreeConverter() {
     TH1I *Total_Row = new TH1I("Total_Row", "Total_Row", 47, 0, 47);
     TH1I *Total_Column = new TH1I("Total_Column", "Total_Column", 59, 0, 59);
 
+    TH2I *RPD_Segmentation = new TH2I("RPD_Segmentation", "RPD_Segmentation", 4, 0, 4, 4, 0, 4);
     TH2I *EM_Cone = new TH2I("EM_Cone", "EM_Cone", 11, 0, 11, 29, 0, 29);
     TH2I *HAD_Cone = new TH2I("HAD_Cone", "HAD_Cone", 36, 0, 36, 59, 0, 59);
     gStyle->SetPalette(kRainBow);
@@ -88,6 +108,7 @@ void TestBeamTreeConverter() {
     tOut->Branch("EM_nCherenkovs", &EM_nCherenkovs);
     tOut->Branch("HAD_nCherenkovs", &HAD_nCherenkovs);
 
+    // Histogram Branches
     tOut->Branch("EM_Row", &EM_Row);
     tOut->Branch("HAD_Row", &HAD_Row);
     tOut->Branch("EM_Column", &EM_Column);
@@ -96,6 +117,7 @@ void TestBeamTreeConverter() {
     tOut->Branch("Total_Column", &Total_Column);
     tOut->Branch("EM_Cone", &EM_Cone);
     tOut->Branch("HAD_Cone", &HAD_Cone);
+    tOut->Branch("RPD_Segmentation", &RPD_Segmentation);
 
     // Standard Branches
     tOut->Branch("TrackID", &trackID, "TrackID/I");
@@ -128,7 +150,10 @@ void TestBeamTreeConverter() {
 
     //Set addresses for tree variables
     Event_Chain.SetBranchAddress("lastStepZ", &LastStepInVolume);
+
     RPD_Chain.SetBranchAddress("nCherenkovs", &RPD_nCherenkovs);
+    RPD_Chain.SetBranchAddress("rodNo", &RPDRodNb);
+
     for (int i = 0; i < 4; i++) {
         ZDC_Chain[i]->SetBranchAddress("rodNo", &zdcRodNb[i]);
         if (i == 0) {
@@ -192,6 +217,12 @@ void TestBeamTreeConverter() {
                 }
             }
         }
+
+        // Module Loop for RPD
+        for (int hit = 0; hit < RPDRodNb->size(); hit++) {
+            RPD_Segmentation->Fill(RPD_ROW_SEG(RPDRodNb->at(hit)), RPD_COL_SEG(RPDRodNb->at(hit)));
+        }
+
         trackID = q;
         tOut->Fill();
     }
