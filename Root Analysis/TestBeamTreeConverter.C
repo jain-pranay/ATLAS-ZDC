@@ -103,8 +103,8 @@ void TestBeamTreeConverter() {
 
     // Output Tree Branches
     // Vector Branches
-    tOut->Branch("LastStepZ", &LastStepInVolume);
-    tOut->Branch("RPD_nCherenkovs", &RPD_nCherenkovs);
+//    tOut->Branch("LastStepZ", &LastStepInVolume);
+    tOut->Branch("RPD_nCherenkovs", RPD_nCherenkovs);
     tOut->Branch("EM_nCherenkovs", &EM_nCherenkovs);
     tOut->Branch("HAD_nCherenkovs", &HAD_nCherenkovs);
 
@@ -149,7 +149,7 @@ void TestBeamTreeConverter() {
     }
 
     //Set addresses for tree variables
-    Event_Chain.SetBranchAddress("lastStepZ", &LastStepInVolume);
+//    Event_Chain.SetBranchAddress("lastStepZ", &LastStepInVolume);
 
     RPD_Chain.SetBranchAddress("nCherenkovs", &RPD_nCherenkovs);
     RPD_Chain.SetBranchAddress("rodNo", &RPDRodNb);
