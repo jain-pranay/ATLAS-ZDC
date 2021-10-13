@@ -6,11 +6,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Commented out RPD_nCherenkovs output branch. (Broken due to update in nCherenkov variable file from RAW root source).">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documents/Program/LED-Emittance/LED-Emittance/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/Program/LED-Emittance/LED-Emittance/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="5096bca3-9421-446e-9cdb-940789868ab3" name="Default Changelist" comment="Restarting work on ATLAS-ZDC. Initial commit - October 13, 2021." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +32,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -84,6 +82,7 @@
       <workItem from="1628686586359" duration="1962000" />
       <workItem from="1628688769370" duration="43000" />
       <workItem from="1628688865129" duration="76000" />
+      <workItem from="1634157946982" duration="316000" />
     </task>
     <task id="LOCAL-00001" summary="Added Pre-existing Files">
       <created>1621940398799</created>
@@ -246,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628688739994</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Restarting work on ATLAS-ZDC. Initial commit - October 13, 2021.">
+      <created>1634158074741</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1634158074741</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,6 +292,7 @@
     <MESSAGE value="- workspace.xml commit" />
     <MESSAGE value="Commented out lastStepZ to reflect new output branches." />
     <MESSAGE value="Commented out RPD_nCherenkovs output branch. (Broken due to update in nCherenkov variable file from RAW root source)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Commented out RPD_nCherenkovs output branch. (Broken due to update in nCherenkov variable file from RAW root source)." />
+    <MESSAGE value="Restarting work on ATLAS-ZDC. Initial commit - October 13, 2021." />
+    <option name="LAST_COMMIT_MESSAGE" value="Restarting work on ATLAS-ZDC. Initial commit - October 13, 2021." />
   </component>
 </project>
