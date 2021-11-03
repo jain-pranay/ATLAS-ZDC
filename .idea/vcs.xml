@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Documents/Program/LED-Emittance" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/JZCaPA" vcs="Git" />
   </component>
 </project>

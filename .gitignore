@@ -11,5 +11,8 @@
 *.root
 *.pdf
 
-#Ignore Documents Directory
+#Ignore Documents and all JZCaPA Directories
 /Documents
+/JZCaPA_BUILD
+/JZCaPA_INSTALL
+/JZCaPA
