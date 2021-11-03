@@ -13,3 +13,6 @@
 
 #Ignore Documents Directory
 /Documents
+/JZCaPA_BUILD
+/JZCaPA_INSTALL
+/JZCaPA
